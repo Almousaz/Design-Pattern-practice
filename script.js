@@ -145,52 +145,90 @@
 //  The Strategy Pattern is a behavioral design pattern that allows you to define a family of algorithms, put them in separate classes, and make them interchangeable at runtime. This pattern is useful when you need to dynamically change an object's behavior without modifying its code.
 
 //  Define the Strategy Interface
-class PaymentStrategy {
-  pay(amount) {
-    throw new Error("This method should be overridden!");
-  }
-}
+// class PaymentStrategy {
+//   pay(amount) {
+//     throw new Error("This method should be overridden!");
+//   }
+// }
 
 //   Create Concrete Strategies
-class CreditCardPayment extends PaymentStrategy {
-  pay(amount) {
-    console.log(`Paid $${amount} using Credit Card.`);
-  }
-}
+// class CreditCardPayment extends PaymentStrategy {
+//   pay(amount) {
+//     console.log(`Paid $${amount} using Credit Card.`);
+//   }
+// }
 
-class PayPalPayment extends PaymentStrategy {
-  pay(amount) {
-    console.log(`Paid $${amount} using PayPal.`);
-  }
-}
+// class PayPalPayment extends PaymentStrategy {
+//   pay(amount) {
+//     console.log(`Paid $${amount} using PayPal.`);
+//   }
+// }
 
-class BitcoinPayment extends PaymentStrategy {
-  pay(amount) {
-    console.log(`Paid $${amount} using Bitcoin.`);
-  }
-}
+// class BitcoinPayment extends PaymentStrategy {
+//   pay(amount) {
+//     console.log(`Paid $${amount} using Bitcoin.`);
+//   }
+// }
 
 //  Create a Context Class
-class PaymentContext {
-  constructor(strategy) {
-    this.strategy = strategy;
+// class PaymentContext {
+//   constructor(strategy) {
+//     this.strategy = strategy;
+//   }
+
+//   setStrategy(strategy) {
+//     this.strategy = strategy;
+//   }
+
+//   executePayment(amount) {
+//     this.strategy.pay(amount);
+//   }
+// }
+
+// const paymentContext = new PaymentContext(new CreditCardPayment());
+
+// paymentContext.executePayment(100);
+
+// paymentContext.setStrategy(new PayPalPayment());
+// paymentContext.executePayment(200);
+
+// paymentContext.setStrategy(new BitcoinPayment());
+// paymentContext.executePayment(300);
+
+
+//  Proxy Pattern 
+// The Proxy Pattern is a structural design pattern used to provide a surrogate or placeholder for another object to control access to it. The proxy acts as an intermediary between the client and the real object, adding an additional layer of control such as lazy initialization, access control, logging, or caching.
+
+class ExpensiveResource {
+    constructor() {
+      console.log("Expensive Resource Initialized");
+      this.data = "Some heavy data";
+    }
+  
+    fetchData() {
+      return this.data;
+    }
   }
 
-  setStrategy(strategy) {
-    this.strategy = strategy;
+  
+  class ResourceProxy {
+    constructor() {
+      this.realResource = null;
+    }
+  
+    fetchData() {
+      if (!this.realResource) {
+        console.log("Creating Expensive Resource...");
+        this.realResource = new ExpensiveResource();
+      }
+      return this.realResource.fetchData();
+    }
   }
+  
+  
 
-  executePayment(amount) {
-    this.strategy.pay(amount);
-  }
-}
-
-const paymentContext = new PaymentContext(new CreditCardPayment());
-
-paymentContext.executePayment(100);
-
-paymentContext.setStrategy(new PayPalPayment());
-paymentContext.executePayment(200);
-
-paymentContext.setStrategy(new BitcoinPayment());
-paymentContext.executePayment(300);
+  const proxy = new ResourceProxy();
+  console.log(proxy.fetchData()); 
+  console.log(proxy.fetchData()); 
+  console.log(proxy.fetchData()); 
+  
