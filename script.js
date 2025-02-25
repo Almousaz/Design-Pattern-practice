@@ -199,36 +199,86 @@
 //  Proxy Pattern 
 // The Proxy Pattern is a structural design pattern used to provide a surrogate or placeholder for another object to control access to it. The proxy acts as an intermediary between the client and the real object, adding an additional layer of control such as lazy initialization, access control, logging, or caching.
 
-class ExpensiveResource {
-    constructor() {
-      console.log("Expensive Resource Initialized");
-      this.data = "Some heavy data";
-    }
+// class ExpensiveResource {
+//     constructor() {
+//       console.log("Expensive Resource Initialized");
+//       this.data = "Some heavy data";
+//     }
   
-    fetchData() {
-      return this.data;
-    }
-  }
+//     fetchData() {
+//       return this.data;
+//     }
+//   }
 
   
-  class ResourceProxy {
-    constructor() {
-      this.realResource = null;
-    }
+//   class ResourceProxy {
+//     constructor() {
+//       this.realResource = null;
+//     }
   
-    fetchData() {
-      if (!this.realResource) {
-        console.log("Creating Expensive Resource...");
-        this.realResource = new ExpensiveResource();
-      }
-      return this.realResource.fetchData();
-    }
-  }
+//     fetchData() {
+//       if (!this.realResource) {
+//         console.log("Creating Expensive Resource...");
+//         this.realResource = new ExpensiveResource();
+//       }
+//       return this.realResource.fetchData();
+//     }
+//   }
   
   
 
-  const proxy = new ResourceProxy();
-  console.log(proxy.fetchData()); 
-  console.log(proxy.fetchData()); 
-  console.log(proxy.fetchData()); 
+//   const proxy = new ResourceProxy();
+//   console.log(proxy.fetchData()); 
+//   console.log(proxy.fetchData()); 
+//   console.log(proxy.fetchData()); 
   
+
+// Observer pattern
+// is a behavioral design pattern 
+// that establishes a one-to-many dependency between objects.
+// ensuring that when one object (the subject) changes its state,
+// all its dependent objects (observers) are automatically notified and updated.
+
+class Subject {
+    constructor() {
+        this.observers = [];
+    }
+
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    removeObserver(observer) {
+        this.observers = this.observers.filter(obs => obs !== observer);
+    }
+
+    notifyObservers(data) {
+        this.observers.forEach(observer => observer.update(data));
+    }
+
+    
+}
+
+class Observer {
+    constructor(name) {
+        this.name = name;
+    }
+
+    update(data) {
+        console.log(`${this.name} received update: ${data}`);
+    }
+}
+
+const subject = new Subject();
+
+const observer1 = new Observer("Observer 1");
+const observer2 = new Observer("Observer 2");
+const observer3 = new Observer("Observer 3");
+const observer4 = new Observer("Observer 4");
+
+subject.addObserver(observer1);
+subject.addObserver(observer2);
+subject.addObserver(observer3);
+subject.addObserver(observer4);
+
+subject.notifyObservers("New data available!");
