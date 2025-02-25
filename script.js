@@ -239,46 +239,124 @@
 // ensuring that when one object (the subject) changes its state,
 // all its dependent objects (observers) are automatically notified and updated.
 
-class Subject {
-    constructor() {
-        this.observers = [];
-    }
+// class Subject {
+//     constructor() {
+//         this.observers = [];
+//     }
 
-    addObserver(observer) {
-        this.observers.push(observer);
-    }
+//     addObserver(observer) {
+//         this.observers.push(observer);
+//     }
 
-    removeObserver(observer) {
-        this.observers = this.observers.filter(obs => obs !== observer);
-    }
+//     removeObserver(observer) {
+//         this.observers = this.observers.filter(obs => obs !== observer);
+//     }
 
-    notifyObservers(data) {
-        this.observers.forEach(observer => observer.update(data));
-    }
+//     notifyObservers(data) {
+//         this.observers.forEach(observer => observer.update(data));
+//     }
 
     
+// }
+
+// class Observer {
+//     constructor(name) {
+//         this.name = name;
+//     }
+
+//     update(data) {
+//         console.log(`${this.name} received update: ${data}`);
+//     }
+// }
+
+// const subject = new Subject();
+
+// const observer1 = new Observer("Observer 1");
+// const observer2 = new Observer("Observer 2");
+// const observer3 = new Observer("Observer 3");
+// const observer4 = new Observer("Observer 4");
+
+// subject.addObserver(observer1);
+// subject.addObserver(observer2);
+// subject.addObserver(observer3);
+// subject.addObserver(observer4);
+
+// subject.notifyObservers("New data available!");
+
+
+
+// Decorator Pattern
+// allows you to dynamically add new behaviors or functionalities to an object without modifying its original structure.
+
+// class Coffee {
+//     cost() {
+//         return 5; 
+//     }
+// }
+
+// const myCoffee = new Coffee();
+// console.log(myCoffee.cost()); 
+
+// function withMilk(coffee) {
+//     const cost = coffee.cost();
+//     coffee.cost = function () {
+//         return cost + 2; 
+//     };
+//     return coffee;
+// }
+
+// function withSugar(coffee) {
+//     const cost = coffee.cost();
+//     coffee.cost = function () {
+//         return cost + 1; 
+//     };
+//     return coffee;
+// }
+
+// let myCoffee = new Coffee();
+// myCoffee = withMilk(myCoffee);
+// myCoffee = withSugar(myCoffee);
+
+// console.log(myCoffee.cost());
+
+// Base class
+class Coffee {
+    cost() {
+        return 5; 
+    }
 }
 
-class Observer {
-    constructor(name) {
-        this.name = name;
+class MilkDecorator {
+    constructor(coffee) {
+        this.coffee = coffee;
     }
 
-    update(data) {
-        console.log(`${this.name} received update: ${data}`);
+    cost() {
+        return this.coffee.cost() + 20; 
     }
 }
 
-const subject = new Subject();
 
-const observer1 = new Observer("Observer 1");
-const observer2 = new Observer("Observer 2");
-const observer3 = new Observer("Observer 3");
-const observer4 = new Observer("Observer 4");
+class SugarDecorator {
+    constructor(coffee) {
+        this.coffee = coffee;
+    }
 
-subject.addObserver(observer1);
-subject.addObserver(observer2);
-subject.addObserver(observer3);
-subject.addObserver(observer4);
+    cost() {
+        return this.coffee.cost() + 10; 
+    }
+}
 
-subject.notifyObservers("New data available!");
+// Usage
+let myCoffee = new Coffee();
+console.log(myCoffee.cost()); 
+
+myCoffee = new MilkDecorator(myCoffee);
+console.log(myCoffee.cost()); 
+
+myCoffee = new SugarDecorator(myCoffee);
+console.log(myCoffee.cost()); 
+
+let baseCoffee = new Coffee();
+let sugarOnly = new SugarDecorator(baseCoffee);
+console.log(sugarOnly.cost());
