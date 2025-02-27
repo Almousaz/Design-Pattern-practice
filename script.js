@@ -320,43 +320,120 @@
 // console.log(myCoffee.cost());
 
 // Base class
-class Coffee {
-    cost() {
-        return 5; 
+// class Coffee {
+//     cost() {
+//         return 5; 
+//     }
+// }
+
+// class MilkDecorator {
+//     constructor(coffee) {
+//         this.coffee = coffee;
+//     }
+
+//     cost() {
+//         return this.coffee.cost() + 20; 
+//     }
+// }
+
+
+// class SugarDecorator {
+//     constructor(coffee) {
+//         this.coffee = coffee;
+//     }
+
+//     cost() {
+//         return this.coffee.cost() + 10; 
+//     }
+// }
+
+// // Usage
+// let myCoffee = new Coffee();
+// console.log(myCoffee.cost()); 
+
+// myCoffee = new MilkDecorator(myCoffee);
+// console.log(myCoffee.cost()); 
+
+// myCoffee = new SugarDecorator(myCoffee);
+// console.log(myCoffee.cost()); 
+
+// let baseCoffee = new Coffee();
+// let sugarOnly = new SugarDecorator(baseCoffee);
+// console.log(sugarOnly.cost());
+
+
+
+//  Coupling 
+// class Logger {
+//     log(message) {
+//       console.log(message);
+//     }
+//   }
+  
+//   class App {
+//     constructor(logger) {
+//       this.logger = logger;
+//     }
+  
+//     run() {
+//       this.logger.log("App is running");
+//     }
+//   }
+  
+//   const logger = new Logger();
+//   const writting = new Logger();
+//   const speak = new Logger();
+
+//   const app = new App(logger);
+//   const app2 = new App(writting);
+//   const app3 = new App(speak);
+//   app.run();
+//   app2.run();
+//   app3.run();
+
+
+
+  class ConsoleLogger {
+    log(message) {
+      console.log(`[Console]: ${message}`);
     }
-}
-
-class MilkDecorator {
-    constructor(coffee) {
-        this.coffee = coffee;
+  }
+  
+  class FileLogger {
+    log(message) {
+      console.log(`[File]: ${message} (pretend this is written to a file)`);
     }
+  }
 
-    cost() {
-        return this.coffee.cost() + 20; 
+  class MahdiGol {
+    log(message) {
+      console.log(`[File222]: ${message} (this is make sure its going right)`);
     }
-}
+  }
 
 
-class SugarDecorator {
-    constructor(coffee) {
-        this.coffee = coffee;
+  
+  class App {
+    constructor(logger) {
+      this.logger = logger; // No hardcoded dependency
     }
-
-    cost() {
-        return this.coffee.cost() + 10; 
+  
+    run() {
+      this.logger.log("App is running");
     }
-}
+  }
+  
+  // Swap loggers easily
+  const consoleLogger = new ConsoleLogger();
+  const fileLogger = new FileLogger();
+  const mahdigole = new MahdiGol()
 
-// Usage
-let myCoffee = new Coffee();
-console.log(myCoffee.cost()); 
+  const app1 = new App(consoleLogger);
+  app1.run(); // Logs: [Console]: App is running
+  
+  const app2 = new App(fileLogger);
+  app2.run(); // Logs: [File]: App is running (pretend this is written to a file)
 
-myCoffee = new MilkDecorator(myCoffee);
-console.log(myCoffee.cost()); 
-
-myCoffee = new SugarDecorator(myCoffee);
-console.log(myCoffee.cost()); 
-
-let baseCoffee = new Coffee();
-let sugarOnly = new SugarDecorator(baseCoffee);
-console.log(sugarOnly.cost());
+  const app3 = new App(mahdigole)
+  app3.run()
+  
