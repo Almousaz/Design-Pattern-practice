@@ -102,35 +102,65 @@
 // The functional programming paradigm is based on the concept of pure functions, immutability, and higher-order functions. It treats computation as the evaluation of mathematical functions and avoids changing state or mutable data.
 
 // Pure function: Always returns the same result for the same input
-const add = (a, b) => a + b;
-console.log(add(2, 3)); // Output: 5
-console.log(add(2, 3)); // Output: 5 (Always the same)
+// const add = (a, b) => a + b;
+// console.log(add(2, 3)); // Output: 5
+// console.log(add(2, 3)); // Output: 5 (Always the same)
 
-const numbers = [1, 2, 3, 4, 5];
+// const numbers = [1, 2, 3, 4, 5];
 
-// Mapping: Creates a new array by squaring each number
-const squared = numbers.map(num => num ** 2);
-console.log(squared); // Output: [1, 4, 9, 16, 25]
+// // Mapping: Creates a new array by squaring each number
+// const squared = numbers.map(num => num ** 2);
+// console.log(squared); // Output: [1, 4, 9, 16, 25]
 
-// Filtering: Returns only even numbers
-const evens = numbers.filter(num => num % 2 === 0);
-console.log(evens); // Output: [2, 4]
+// // Filtering: Returns only even numbers
+// const evens = numbers.filter(num => num % 2 === 0);
+// console.log(evens); // Output: [2, 4]
 
-// Reducing: Calculates the sum of all numbers
-const sum = numbers.reduce((acc, num) => acc + num, 0);
-console.log(sum); // Output: 15
+// // Reducing: Calculates the sum of all numbers
+// const sum = numbers.reduce((acc, num) => acc + num, 0);
+// console.log(sum); // Output: 15
 
-// Using Higher-Order Functions
-// A function that returns another function
-const multiplyBy = factor => num => num * factor;
+// // Using Higher-Order Functions
+// // A function that returns another function
+// const multiplyBy = factor => num => num * factor;
 
-const double = multiplyBy(2);
-console.log(double(5)); // Output: 10
+// const double = multiplyBy(2);
+// console.log(double(5)); // Output: 10
 
-const triple = multiplyBy(3);
-console.log(triple(5)); // Output: 15
+// const triple = multiplyBy(3);
+// console.log(triple(5)); // Output: 15
 
 
-const person = { name: "Ali", age: 25 };
-const updatedPerson = { ...person, age: 26 }; // Creating a new object instead of modifying the original
-console.log(updatedPerson); // Output: { name: "Ali", age: 26 }
+// const person = { name: "Ali", age: 25 };
+// const updatedPerson = { ...person, age: 26 }; // Creating a new object instead of modifying the original
+// console.log(updatedPerson); // Output: { name: "Ali", age: 26 }
+
+
+// Higher-Order Functions (HOFs)
+
+// Example: map(), filter(), and reduce() (Built-in HOFs)
+// Passing Functions as Arguments
+// const numbers = [1, 2, 3, 4, 5];
+
+// // map() applies the provided function to each element
+// const doubled = numbers.map(num => num * 2);
+// console.log(doubled); // Output: [2, 4, 6, 8, 10]
+
+// // filter() returns only elements that satisfy the condition
+// const evens = numbers.filter(num => num % 2 === 0);
+// console.log(evens); // Output: [2, 4]
+
+// // reduce() accumulates values into a single result
+// const sum = numbers.reduce((acc, num) => acc + num, 0);
+// console.log(sum); // Output: 15
+
+// // Returning Functions (Function Factory)
+// // Example: Function that generates customized functions
+// const multiplyBy = factor => num => num * factor;
+
+// // Creating specific functions
+// const double = multiplyBy(2);
+// const triple = multiplyBy(3);
+
+// console.log(double(5)); // Output: 10
+// console.log(triple(5)); // Output: 15
