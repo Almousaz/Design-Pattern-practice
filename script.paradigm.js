@@ -1,17 +1,15 @@
 //  Imperative programming paradigm
 //  one of the oldest and most fundamental approaches to programming. It focuses on how a task should be performed by specifying a sequence of instructions that change the program's state step by step.
 
-
 // Array to store marks
 // let marks = [12, 32, 45, 13, 19];
 
 // Variable to store the sum of marks
 // let sum = 0;
 
-
 // Calculate the sum of marks
 // for (let i = 0; i < marks.length ; i++) {
-    // sum = sum + marks[i];
+// sum = sum + marks[i];
 // }
 
 // Variable to store the average
@@ -21,7 +19,6 @@
 
 // Output the average
 // console.log("Average of five numbers: " + average);
-
 
 // Procedural programming paradigm
 // is a subset of imperative programming that structures code into procedures (also called functions or subroutines). It emphasizes breaking a program into reusable blocks of code to improve organization and reusability.
@@ -51,7 +48,7 @@
 //         this.sex = sex;
 //         this.mob = mob;
 //     }
-    
+
 //     create(userid, name, emailid, sex, mob) {
 //         console.log("Welcome to our platform!\nLet's create your account\n");
 //         this.userid = 98765;
@@ -66,7 +63,6 @@
 // console.log("Platform Initialized!");
 // let s1 = new Signup();
 // s1.create(42, "Jordan", "jordan@example.com", 'N', 5678901234);
-
 
 // Declarative programming paradigm
 // The declarative programming paradigm focuses on what the program should accomplish rather than how to achieve it. It expresses logic and relationships without explicitly defining step-by-step instructions
@@ -86,8 +82,6 @@
 // }
 // console.log(evenNumbersWay2); // Output: [2, 4, 6, 8, 10]
 
-
-
 // const num2 = [1, 2, 3, 4];
 // const squaredNumbers = num2.map(num => num ** 2);
 // console.log(squaredNumbers); // Output: [1, 4, 9, 16]
@@ -95,7 +89,6 @@
 // const num3 = [1, 2, 3, 4, 5];
 // const sum1 = numbers.reduce((acc, num) => acc + num, 0);
 // console.log(sum1); // Output: 15
-
 
 // Functional Programming (FP) Paradigm
 
@@ -130,11 +123,9 @@
 // const triple = multiplyBy(3);
 // console.log(triple(5)); // Output: 15
 
-
 // const person = { name: "Ali", age: 25 };
 // const updatedPerson = { ...person, age: 26 }; // Creating a new object instead of modifying the original
 // console.log(updatedPerson); // Output: { name: "Ali", age: 26 }
-
 
 // Higher-Order Functions (HOFs)
 
@@ -143,11 +134,11 @@
 // const numbers = [1, 2, 3, 4, 5];
 
 // // map() applies the provided function to each element
-// const doubled = numbers.map(num => num * 2);
+// const doubled = numbers.map((num) => num * 2);
 // console.log(doubled); // Output: [2, 4, 6, 8, 10]
 
 // // filter() returns only elements that satisfy the condition
-// const evens = numbers.filter(num => num % 2 === 0);
+// const evens = numbers.filter((num) => num % 2 === 0);
 // console.log(evens); // Output: [2, 4]
 
 // // reduce() accumulates values into a single result
@@ -156,7 +147,7 @@
 
 // // Returning Functions (Function Factory)
 // // Example: Function that generates customized functions
-// const multiplyBy = factor => num => num * factor;
+// const multiplyBy = (factor) => (num) => num * factor;
 
 // // Creating specific functions
 // const double = multiplyBy(2);
