@@ -755,3 +755,38 @@ const randomAnimal = new Animal();
 makeAnimalSound(myDog); // Output: Woof! Woof!
 makeAnimalSound(myCat); // Output: Meow! Meow!
 makeAnimalSound(randomAnimal); // Output: Some generic animal sound
+
+//  -----------------------------Adapter Design Pattern-----------------------
+//  is a structural design pattern that allows incompatible interfaces to work together.
+// It acts as a bridge between two incompatible interfaces by converting one interface into another that is expected by the client.
+// Legacy system
+class OldPrinter {
+    printText(text) {
+        console.log("Printing from Old Printer: " + text);
+    }
+}
+// New system that expects a different interface
+class NewPrinter {
+    print(message) {
+        console.log("New Printer printing: " + message);
+    }
+}
+// Adapter class
+class PrinterAdapter {
+    constructor(oldPrinter) {
+        this.oldPrinter = oldPrinter;  // The old printer is passed to the adapter
+    }
+
+    print(message) {
+        // Adapter makes the OldPrinter compatible with NewPrinter's expected interface
+        this.oldPrinter.printText(message);  // Use the old printer's printText method
+    }
+}
+// Creating an instance of the old printer
+const oldPrinter = new OldPrinter();
+
+// Using the adapter to make the old printer compatible with the new system
+const adapter = new PrinterAdapter(oldPrinter);
+
+// Now we can use the adapter as if it's a NewPrinter
+adapter.print("Hello, Adapter Pattern!");  // Output: Printing from Old Printer: Hello, Adapter Pattern!
