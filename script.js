@@ -499,189 +499,259 @@
 // ------------------------------------------Abstract Factory------------------------------------
 // Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
 
-
 // Abstract Product: Button
-class Button {
-    render() {
-      throw new Error("render() must be implemented");
-    }
+// class Button {
+//   render() {
+//     throw new Error('render() must be implemented');
+//   }
+// }
+
+// // Abstract Product: Textbox
+// class Textbox {
+//   render() {
+//     throw new Error('render() must be implemented');
+//   }
+// }
+
+// // Concrete Product: Dark Themed Components
+// class DarkButton extends Button {
+//   render() {
+//     console.log('Rendering Dark Button 🖤');
+//   }
+// }
+
+// class DarkTextbox extends Textbox {
+//   render() {
+//     console.log('Rendering Dark Textbox 🖤');
+//   }
+// }
+
+// // Concrete Product: Light Themed Components
+// class LightButton extends Button {
+//   render() {
+//     console.log('Rendering Light Button 🤍');
+//   }
+// }
+
+// class LightTextbox extends Textbox {
+//   render() {
+//     console.log('Rendering Light Textbox 🤍');
+//   }
+// }
+
+// // Abstract Factory
+// class ThemeFactory {
+//   createButton() {
+//     throw new Error('createButton() must be implemented');
+//   }
+
+//   createTextbox() {
+//     throw new Error('createTextbox() must be implemented');
+//   }
+// }
+
+// // Concrete Factory: Dark Theme
+// class DarkThemeFactory extends ThemeFactory {
+//   createButton() {
+//     return new DarkButton();
+//   }
+
+//   createTextbox() {
+//     return new DarkTextbox();
+//   }
+// }
+
+// // Concrete Factory: Light Theme
+// class LightThemeFactory extends ThemeFactory {
+//   createButton() {
+//     return new LightButton();
+//   }
+
+//   createTextbox() {
+//     return new LightTextbox();
+//   }
+// }
+
+// function createUI(factory) {
+//   const button = factory.createButton();
+//   const textbox = factory.createTextbox();
+
+//   button.render();
+//   textbox.render();
+// }
+
+// // Example usage
+// const darkTheme = new DarkThemeFactory();
+// console.log('Dark Theme UI:');
+// createUI(darkTheme);
+
+// const lightTheme = new LightThemeFactory();
+// console.log('\nLight Theme UI:');
+// createUI(lightTheme);
+
+// //    -------------------another example for Abstract factory-------------------------
+// // Abstract Product: Engine
+// class Engine {
+//   start() {
+//     throw new Error('start() must be implemented');
+//   }
+// }
+
+// // Abstract Product: Wheels
+// class Wheels {
+//   roll() {
+//     throw new Error('roll() must be implemented');
+//   }
+// }
+
+// // Concrete Product: Car Engine
+// class CarEngine extends Engine {
+//   start() {
+//     console.log('Car engine starts with a roar!');
+//   }
+// }
+
+// // Concrete Product: Car Wheels
+// class CarWheels extends Wheels {
+//   roll() {
+//     console.log('Car wheels are rolling smoothly on the road.');
+//   }
+// }
+
+// // Concrete Product: Motorcycle Engine
+// class MotorcycleEngine extends Engine {
+//   start() {
+//     console.log('Motorcycle engine starts with a vroom!');
+//   }
+// }
+
+// // Concrete Product: Motorcycle Wheels
+// class MotorcycleWheels extends Wheels {
+//   roll() {
+//     console.log('Motorcycle wheels are rolling fast and sleek.');
+//   }
+// }
+
+// // Abstract Factory
+// class VehicleFactory {
+//   createEngine() {
+//     throw new Error('createEngine() must be implemented');
+//   }
+
+//   createWheels() {
+//     throw new Error('createWheels() must be implemented');
+//   }
+// }
+
+// // Concrete Factory: Car Factory
+// class CarFactory extends VehicleFactory {
+//   createEngine() {
+//     return new CarEngine();
+//   }
+
+//   createWheels() {
+//     return new CarWheels();
+//   }
+// }
+
+// // Concrete Factory: Motorcycle Factory
+// class MotorcycleFactory extends VehicleFactory {
+//   createEngine() {
+//     return new MotorcycleEngine();
+//   }
+
+//   createWheels() {
+//     return new MotorcycleWheels();
+//   }
+// }
+
+// function buildVehicle(factory) {
+//   const engine = factory.createEngine();
+//   const wheels = factory.createWheels();
+
+//   engine.start();
+//   wheels.roll();
+// }
+
+// // Example usage
+// console.log('Building a Car:');
+// const carFactory = new CarFactory();
+// buildVehicle(carFactory);
+
+// console.log('\nBuilding a Motorcycle:');
+// const motorcycleFactory = new MotorcycleFactory();
+// buildVehicle(motorcycleFactory);
+
+// ----------------------------------Encapsulation----------------------------
+// Encapsulation is the practice of bundling data (properties) and methods that operate on that data into a single unit (object or class) while restricting direct access to some of the object's details. This helps maintain control over how data is modified.
+
+class BankAccount {
+  #balance; // Private property
+
+  constructor(owner, balance) {
+    this.owner = owner;
+    this.#balance = balance;
+    console.log(balance);
   }
-  
-  // Abstract Product: Textbox
-  class Textbox {
-    render() {
-      throw new Error("render() must be implemented");
+
+  deposit(amount) {
+    if (amount > 0) {
+      this.#balance += amount;
+      console.log(`Deposited: $${amount}`);
     }
   }
 
-// Concrete Product: Dark Themed Components
-class DarkButton extends Button {
-    render() {
-      console.log("Rendering Dark Button 🖤");
+  withdraw(amount) {
+    if (amount > 0 && amount <= this.#balance) {
+      this.#balance -= amount;
+      console.log(`Withdrawn: $${amount}`);
+    } else {
+      console.log('Insufficient funds');
     }
   }
-  
-  class DarkTextbox extends Textbox {
-    render() {
-      console.log("Rendering Dark Textbox 🖤");
-    }
-  }
-  
-  // Concrete Product: Light Themed Components
-  class LightButton extends Button {
-    render() {
-      console.log("Rendering Light Button 🤍");
-    }
-  }
-  
-  class LightTextbox extends Textbox {
-    render() {
-      console.log("Rendering Light Textbox 🤍");
-    }
-  }
-   
-  // Abstract Factory
-class ThemeFactory {
-    createButton() {
-      throw new Error("createButton() must be implemented");
-    }
-  
-    createTextbox() {
-      throw new Error("createTextbox() must be implemented");
-    }
-  }
-  
 
-  // Concrete Factory: Dark Theme
-class DarkThemeFactory extends ThemeFactory {
-    createButton() {
-      return new DarkButton();
-    }
-  
-    createTextbox() {
-      return new DarkTextbox();
-    }
+  getBalance() {
+    return `Balance: $${this.#balance}`;
   }
-  
-  // Concrete Factory: Light Theme
-  class LightThemeFactory extends ThemeFactory {
-    createButton() {
-      return new LightButton();
-    }
-  
-    createTextbox() {
-      return new LightTextbox();
-    }
-  }
-  
+}
 
-  function createUI(factory) {
-    const button = factory.createButton();
-    const textbox = factory.createTextbox();
-  
-    button.render();
-    textbox.render();
+const myAccount = new BankAccount('Ali', 500);
+console.log(myAccount.owner);
+myAccount.deposit(200);
+console.log(myAccount.getBalance());
+myAccount.withdraw(100);
+console.log(myAccount.getBalance());
+
+//  -----------------------------------------Polymorphism----------------------
+// allows objects to be treated as instances of their parent class, enabling method overriding where a subclass provides a specific implementation of a method from its superclass.
+// Polymorphism is the ability for objects of different classes to respond to the same method in their own unique ways
+class Animal {
+  makeSound() {
+    console.log('Some generic animal sound');
   }
-  
-  // Example usage
-  const darkTheme = new DarkThemeFactory();
-  console.log("Dark Theme UI:");
-  createUI(darkTheme);
-  
-  const lightTheme = new LightThemeFactory();
-  console.log("\nLight Theme UI:");
-  createUI(lightTheme);
-  
-//    -------------------another example for Abstract factory-------------------------
-// Abstract Product: Engine
-class Engine {
-    start() {
-      throw new Error("start() must be implemented");
-    }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log('Woof! Woof!');
   }
-  
-  // Abstract Product: Wheels
-  class Wheels {
-    roll() {
-      throw new Error("roll() must be implemented");
-    }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    console.log('Meow! Meow!');
   }
-  
-  // Concrete Product: Car Engine
-class CarEngine extends Engine {
-    start() {
-      console.log("Car engine starts with a roar!");
-    }
-  }
-  
-  // Concrete Product: Car Wheels
-  class CarWheels extends Wheels {
-    roll() {
-      console.log("Car wheels are rolling smoothly on the road.");
-    }
-  }
-  
-  // Concrete Product: Motorcycle Engine
-  class MotorcycleEngine extends Engine {
-    start() {
-      console.log("Motorcycle engine starts with a vroom!");
-    }
-  }
-  
-  // Concrete Product: Motorcycle Wheels
-  class MotorcycleWheels extends Wheels {
-    roll() {
-      console.log("Motorcycle wheels are rolling fast and sleek.");
-    }
-  }
-  
-  // Abstract Factory
-class VehicleFactory {
-    createEngine() {
-      throw new Error("createEngine() must be implemented");
-    }
-  
-    createWheels() {
-      throw new Error("createWheels() must be implemented");
-    }
-  }
-  
-  // Concrete Factory: Car Factory
-class CarFactory extends VehicleFactory {
-    createEngine() {
-      return new CarEngine();
-    }
-  
-    createWheels() {
-      return new CarWheels();
-    }
-  }
-  
-  // Concrete Factory: Motorcycle Factory
-  class MotorcycleFactory extends VehicleFactory {
-    createEngine() {
-      return new MotorcycleEngine();
-    }
-  
-    createWheels() {
-      return new MotorcycleWheels();
-    }
-  }
-  
-  function buildVehicle(factory) {
-    const engine = factory.createEngine();
-    const wheels = factory.createWheels();
-  
-    engine.start();
-    wheels.roll();
-  }
-  
-  // Example usage
-  console.log("Building a Car:");
-  const carFactory = new CarFactory();
-  buildVehicle(carFactory);
-  
-  console.log("\nBuilding a Motorcycle:");
-  const motorcycleFactory = new MotorcycleFactory();
-  buildVehicle(motorcycleFactory);
-  
+}
+
+// Function demonstrating polymorphism
+function makeAnimalSound(animal) {
+  animal.makeSound();
+}
+
+const myDog = new Dog();
+const myCat = new Cat();
+const randomAnimal = new Animal();
+
+makeAnimalSound(myDog); // Output: Woof! Woof!
+makeAnimalSound(myCat); // Output: Meow! Meow!
+makeAnimalSound(randomAnimal); // Output: Some generic animal sound
