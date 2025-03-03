@@ -685,108 +685,495 @@
 // ----------------------------------Encapsulation----------------------------
 // Encapsulation is the practice of bundling data (properties) and methods that operate on that data into a single unit (object or class) while restricting direct access to some of the object's details. This helps maintain control over how data is modified.
 
-class BankAccount {
-  #balance; // Private property
+// class BankAccount {
+//   #balance; // Private property
 
-  constructor(owner, balance) {
-    this.owner = owner;
-    this.#balance = balance;
-    console.log(balance);
-  }
+//   constructor(owner, balance) {
+//     this.owner = owner;
+//     this.#balance = balance;
+//     console.log(balance);
+//   }
 
-  deposit(amount) {
-    if (amount > 0) {
-      this.#balance += amount;
-      console.log(`Deposited: $${amount}`);
-    }
-  }
+//   deposit(amount) {
+//     if (amount > 0) {
+//       this.#balance += amount;
+//       console.log(`Deposited: $${amount}`);
+//     }
+//   }
 
-  withdraw(amount) {
-    if (amount > 0 && amount <= this.#balance) {
-      this.#balance -= amount;
-      console.log(`Withdrawn: $${amount}`);
-    } else {
-      console.log('Insufficient funds');
-    }
-  }
+//   withdraw(amount) {
+//     if (amount > 0 && amount <= this.#balance) {
+//       this.#balance -= amount;
+//       console.log(`Withdrawn: $${amount}`);
+//     } else {
+//       console.log('Insufficient funds');
+//     }
+//   }
 
-  getBalance() {
-    return `Balance: $${this.#balance}`;
-  }
-}
+//   getBalance() {
+//     return `Balance: $${this.#balance}`;
+//   }
+// }
 
-const myAccount = new BankAccount('Ali', 500);
-console.log(myAccount.owner);
-myAccount.deposit(200);
-console.log(myAccount.getBalance());
-myAccount.withdraw(100);
-console.log(myAccount.getBalance());
+// const myAccount = new BankAccount('Ali', 500);
+// console.log(myAccount.owner);
+// myAccount.deposit(200);
+// console.log(myAccount.getBalance());
+// myAccount.withdraw(100);
+// console.log(myAccount.getBalance());
 
 //  -----------------------------------------Polymorphism----------------------
 // allows objects to be treated as instances of their parent class, enabling method overriding where a subclass provides a specific implementation of a method from its superclass.
 // Polymorphism is the ability for objects of different classes to respond to the same method in their own unique ways
-class Animal {
-  makeSound() {
-    console.log('Some generic animal sound');
-  }
-}
+// class Animal {
+//   makeSound() {
+//     console.log('Some generic animal sound');
+//   }
+// }
 
-class Dog extends Animal {
-  makeSound() {
-    console.log('Woof! Woof!');
-  }
-}
+// class Dog extends Animal {
+//   makeSound() {
+//     console.log('Woof! Woof!');
+//   }
+// }
 
-class Cat extends Animal {
-  makeSound() {
-    console.log('Meow! Meow!');
-  }
-}
+// class Cat extends Animal {
+//   makeSound() {
+//     console.log('Meow! Meow!');
+//   }
+// }
 
-// Function demonstrating polymorphism
-function makeAnimalSound(animal) {
-  animal.makeSound();
-}
+// // Function demonstrating polymorphism
+// function makeAnimalSound(animal) {
+//   animal.makeSound();
+// }
 
-const myDog = new Dog();
-const myCat = new Cat();
-const randomAnimal = new Animal();
+// const myDog = new Dog();
+// const myCat = new Cat();
+// const randomAnimal = new Animal();
 
-makeAnimalSound(myDog); // Output: Woof! Woof!
-makeAnimalSound(myCat); // Output: Meow! Meow!
-makeAnimalSound(randomAnimal); // Output: Some generic animal sound
+// makeAnimalSound(myDog); // Output: Woof! Woof!
+// makeAnimalSound(myCat); // Output: Meow! Meow!
+// makeAnimalSound(randomAnimal); // Output: Some generic animal sound
 
 //  -----------------------------Adapter Design Pattern-----------------------
 //  is a structural design pattern that allows incompatible interfaces to work together.
 // It acts as a bridge between two incompatible interfaces by converting one interface into another that is expected by the client.
 // Legacy system
-class OldPrinter {
-    printText(text) {
-        console.log("Printing from Old Printer: " + text);
-    }
-}
-// New system that expects a different interface
-class NewPrinter {
-    print(message) {
-        console.log("New Printer printing: " + message);
-    }
-}
-// Adapter class
-class PrinterAdapter {
-    constructor(oldPrinter) {
-        this.oldPrinter = oldPrinter;  // The old printer is passed to the adapter
-    }
+// class OldPrinter {
+//     printText(text) {
+//         console.log("Printing from Old Printer: " + text);
+//     }
+// }
+// // New system that expects a different interface
+// class NewPrinter {
+//     print(message) {
+//         console.log("New Printer printing: " + message);
+//     }
+// }
+// // Adapter class
+// class PrinterAdapter {
+//     constructor(oldPrinter) {
+//         this.oldPrinter = oldPrinter;  // The old printer is passed to the adapter
+//     }
 
-    print(message) {
-        // Adapter makes the OldPrinter compatible with NewPrinter's expected interface
-        this.oldPrinter.printText(message);  // Use the old printer's printText method
-    }
+//     print(message) {
+//         // Adapter makes the OldPrinter compatible with NewPrinter's expected interface
+//         this.oldPrinter.printText(message);  // Use the old printer's printText method
+//     }
+// }
+// // Creating an instance of the old printer
+// const oldPrinter = new OldPrinter();
+
+// // Using the adapter to make the old printer compatible with the new system
+// const adapter = new PrinterAdapter(oldPrinter);
+
+// // Now we can use the adapter as if it's a NewPrinter
+// adapter.print("Hello, Adapter Pattern!");  // Output: Printing from Old Printer: Hello, Adapter Pattern!
+
+// The legacy class: Old MP3 player
+// class MP3Player {
+//   playMP3(file) {
+//     console.log('Playing MP3 file: ' + file);
+//   }
+// }
+
+// // New system: MP4 player
+// class MP4Player {
+//   playMP4(file) {
+//     console.log('Playing MP4 file: ' + file);
+//   }
+// }
+
+// // Adapter class: MP4 to MP3 Adapter
+// class MP4Adapter {
+//   constructor(mp4Player) {
+//     this.mp4Player = mp4Player; // The MP4 player is passed to the adapter
+//   }
+
+//   playMP3(file) {
+//     // The adapter converts the MP3 request to MP4 request
+//     console.log('Adapter: Converting to MP4...');
+//     this.mp4Player.playMP4(file); // Use the MP4 player's playMP4 method
+//   }
+// }
+// // Creating instances of the old and new players
+// const mp3Player = new MP3Player();
+// const mp4Player = new MP4Player();
+
+// // Using the adapter to play MP4 file on the MP3 player
+// const adapter = new MP4Adapter(mp4Player);
+
+// // The MP3 player can now use the adapter to play MP4 files
+// mp3Player.playMP3('song.mp3'); // Output: Playing MP3 file: song.mp3
+// adapter.playMP3('movie.mp4'); // Output: Adapter: Converting to MP4... Playing MP4 file: movie.mp4
+
+// // ------------------------Composite Design Pattern ------------------------
+// // is a structural design pattern that lets you compose objects into tree-like structures to represent part-whole hierarchies. It enables clients to treat individual objects and compositions of objects uniformly.
+// // In simpler terms, the Composite Pattern allows you to treat a group of objects the same way as a single object. This is particularly useful when you want to work with a hierarchical collection of objects, where individual objects and groups of objects should be treated in the same way.
+
+// // Component
+// class Worker {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   getDetails() {
+//     throw new Error("Method 'getDetails' must be implemented");
+//   }
+// }
+
+// // Leaf: Individual worker
+// class Employee extends Worker {
+//   constructor(name) {
+//     super(name);
+//   }
+
+//   getDetails() {
+//     console.log(`Employee: ${this.name}`);
+//   }
+// }
+// // Composite: Manager
+// class Manager extends Worker {
+//   constructor(name) {
+//     super(name);
+//     this.subordinates = []; // List of workers this manager oversees
+//   }
+
+//   add(worker) {
+//     this.subordinates.push(worker);
+//   }
+
+//   getDetails() {
+//     console.log(`Manager: ${this.name}`);
+//     this.subordinates.forEach((subordinate) => subordinate.getDetails()); // Delegate to subordinates
+//   }
+// }
+// // Create individual employees
+// const employee1 = new Employee('Alice');
+// const employee2 = new Employee('Bob');
+// const employee3 = new Employee('Charlie');
+
+// // Create a manager and assign subordinates
+// const manager1 = new Manager('David');
+// manager1.add(employee1);
+// manager1.add(employee2);
+
+// // Create a higher-level manager and assign subordinates
+// const manager2 = new Manager('Eve');
+// manager2.add(manager1);
+// manager2.add(employee3);
+
+// // Display details of the entire hierarchy
+// manager2.getDetails();
+
+// // -----------------------------------example 2----------------------------
+// // Component: Common interface for both Files and Folders
+// class FileSystemItem {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   showDetails(indent = 0) {
+//     throw new Error("Method 'showDetails()' must be implemented");
+//   }
+// }
+// // Leaf: Represents an individual file
+// class File extends FileSystemItem {
+//   constructor(name, size) {
+//     super(name);
+//     this.size = size;
+//   }
+
+//   showDetails(indent = 0) {
+//     console.log(`${' '.repeat(indent)}📄 File: ${this.name} (${this.size} KB)`);
+//   }
+// }
+
+// // Composite: Represents a folder that can contain files or other folders
+// class Folder extends FileSystemItem {
+//   constructor(name) {
+//     super(name);
+//     this.children = [];
+//   }
+
+//   add(item) {
+//     this.children.push(item);
+//   }
+
+//   remove(item) {
+//     this.children = this.children.filter((child) => child !== item);
+//   }
+
+//   showDetails(indent = 0) {
+//     console.log(`${' '.repeat(indent)}📁 Folder: ${this.name}`);
+//     this.children.forEach((child) => child.showDetails(indent + 2));
+//   }
+// }
+// // Creating files
+// const file1 = new File('Resume.pdf', 120);
+// const file2 = new File('CoverLetter.docx', 80);
+// const file3 = new File('Project.zip', 3000);
+
+// // Creating folders
+// const docsFolder = new Folder('Documents');
+// const projectsFolder = new Folder('Projects');
+// const mainFolder = new Folder('My Files');
+
+// // Building the hierarchy
+// docsFolder.add(file1);
+// docsFolder.add(file2);
+// projectsFolder.add(file3);
+// mainFolder.add(docsFolder);
+// mainFolder.add(projectsFolder);
+
+// // Displaying the file system
+// mainFolder.showDetails();
+
+// // ---------------------------------------Bridge Design Pattern------------------------------------
+// // is a structural design pattern that decouples an abstraction from its implementation, allowing them to evolve independently. In simpler terms, it allows you to separate the interface (abstraction) from the implementation, so that the two can vary independently.
+
+// // Implementor Interface: Device
+// class Device {
+//   turnOn() {
+//     throw new Error("Method 'turnOn()' must be implemented");
+//   }
+//   turnOff() {
+//     throw new Error("Method 'turnOff()' must be implemented");
+//   }
+//   setVolume(volume) {
+//     throw new Error("Method 'setVolume()' must be implemented");
+//   }
+// }
+// // Concrete Implementor: TV
+// class TV extends Device {
+//   turnOn() {
+//     console.log('Turning on the TV.');
+//   }
+//   turnOff() {
+//     console.log('Turning off the TV.');
+//   }
+//   setVolume(volume) {
+//     console.log(`Setting TV volume to ${volume}`);
+//   }
+// }
+
+// // Concrete Implementor: Radio
+// class Radio extends Device {
+//   turnOn() {
+//     console.log('Turning on the Radio.');
+//   }
+//   turnOff() {
+//     console.log('Turning off the Radio.');
+//   }
+//   setVolume(volume) {
+//     console.log(`Setting Radio volume to ${volume}`);
+//   }
+// }
+// // Abstraction: RemoteControl
+// class RemoteControl {
+//   constructor(device) {
+//     this.device = device; // Bridge to the device
+//   }
+
+//   turnOn() {
+//     this.device.turnOn();
+//   }
+
+//   turnOff() {
+//     this.device.turnOff();
+//   }
+
+//   setVolume(volume) {
+//     this.device.setVolume(volume);
+//   }
+// }
+// // Refined Abstraction: AdvancedRemoteControl
+// class AdvancedRemoteControl extends RemoteControl {
+//   mute() {
+//     console.log('Muting the device.');
+//     this.device.setVolume(0); // Mute the device
+//   }
+// }
+// // Create different devices
+// const tv = new TV();
+// const radio = new Radio();
+
+// // Create a basic remote control for each device
+// const tvRemote = new RemoteControl(tv);
+// const radioRemote = new RemoteControl(radio);
+
+// // Using the basic remote controls
+// tvRemote.turnOn(); // Output: Turning on the TV.
+// tvRemote.setVolume(10); // Output: Setting TV volume to 10
+// radioRemote.turnOn(); // Output: Turning on the Radio.
+// radioRemote.setVolume(5); // Output: Setting Radio volume to 5
+
+// // Create an advanced remote control for the TV
+// const advancedTvRemote = new AdvancedRemoteControl(tv);
+// advancedTvRemote.mute(); // Output: Muting the device. Setting TV volume to 0
+
+//  -------------------------------another example for bridge Payment Gateway-----------------------
+
+// Implementation Interface: Payment Gateway
+// class PaymentGateway {
+//   processPayment(amount) {
+//     throw new Error("Method 'processPayment()' must be implemented.");
+//   }
+// }
+// // Concrete Implementation: Stripe Gateway
+// class StripeGateway extends PaymentGateway {
+//   processPayment(amount) {
+//     console.log(`💳 Processing $${amount} through Stripe...`);
+//   }
+// }
+
+// // Concrete Implementation: PayPal Gateway
+// class PayPalGateway extends PaymentGateway {
+//   processPayment(amount) {
+//     console.log(`🅿️ Processing $${amount} through PayPal...`);
+//   }
+// }
+
+// // Concrete Implementation: Crypto Gateway
+// class CryptoGateway extends PaymentGateway {
+//   processPayment(amount) {
+//     console.log(
+//       `₿ Processing $${amount} in Bitcoin through Crypto Exchange...`
+//     );
+//   }
+// }
+// // Abstraction: Payment Method
+// class PaymentMethod {
+//   constructor(gateway) {
+//     this.gateway = gateway;
+//   }
+
+//   makePayment(amount) {
+//     this.gateway.processPayment(amount);
+//   }
+// }
+// // Refined Abstraction: Credit Card Payment
+// class CreditCardPayment extends PaymentMethod {
+//   makePayment(amount) {
+//     console.log('Using Credit Card for payment...');
+//     super.makePayment(amount);
+//   }
+// }
+
+// // Refined Abstraction: PayPal Payment
+// class PayPalPayment extends PaymentMethod {
+//   makePayment(amount) {
+//     console.log('Using PayPal for payment...');
+//     super.makePayment(amount);
+//   }
+// }
+
+// // Refined Abstraction: Bitcoin Payment
+// class BitcoinPayment extends PaymentMethod {
+//   makePayment(amount) {
+//     console.log('Using Bitcoin for payment...');
+//     super.makePayment(amount);
+//   }
+// }
+
+// // Create Payment Gateways
+// const stripeGateway = new StripeGateway();
+// const paypalGateway = new PayPalGateway();
+// const cryptoGateway = new CryptoGateway();
+
+// // Create Payment Methods with different gateways
+// const creditCardPayment = new CreditCardPayment(stripeGateway);
+// const paypalPayment = new PayPalPayment(paypalGateway);
+// const bitcoinPayment = new BitcoinPayment(cryptoGateway);
+
+// // Process Payments
+// creditCardPayment.makePayment(100);
+// console.log('\n');
+// paypalPayment.makePayment(200);
+// console.log('\n');
+// bitcoinPayment.makePayment(300);
+
+// Step 1: Create an interface for TV (Implementation)
+class TV {
+  turnOn() {
+    console.log('TV is ON');
+  }
+  turnOff() {
+    console.log('TV is OFF');
+  }
 }
-// Creating an instance of the old printer
-const oldPrinter = new OldPrinter();
 
-// Using the adapter to make the old printer compatible with the new system
-const adapter = new PrinterAdapter(oldPrinter);
+// Step 2: Create Concrete Implementations (Different TV Brands)
+class SonyTV extends TV {
+  turnOn() {
+    console.log('Sony TV is ON');
+  }
+  turnOff() {
+    console.log('Sony TV is OFF');
+  }
+}
 
-// Now we can use the adapter as if it's a NewPrinter
-adapter.print("Hello, Adapter Pattern!");  // Output: Printing from Old Printer: Hello, Adapter Pattern!
+class SamsungTV extends TV {
+  turnOn() {
+    console.log('Samsung TV is ON');
+  }
+  turnOff() {
+    console.log('Samsung TV is OFF');
+  }
+}
+
+class LGTV extends TV {
+  turnOn() {
+    console.log('LG TV is ON');
+  }
+  turnOff() {
+    console.log('LG TV is OFF');
+  }
+}
+
+// Step 3: Create an Abstraction (Remote Control)
+class Remote {
+  constructor(tv) {
+    this.tv = tv; // Bridge: The remote holds a reference to a TV
+  }
+
+  powerOn() {
+    this.tv.turnOn(); // Delegates the action to the TV
+  }
+
+  powerOff() {
+    this.tv.turnOff();
+  }
+}
+
+// Step 4: Use the Bridge
+const sonyRemote = new Remote(new SonyTV());
+sonyRemote.powerOn(); // Output: Sony TV is ON
+
+const samsungRemote = new Remote(new SamsungTV());
+samsungRemote.powerOn(); // Output: Samsung TV is ON
+
+const LGRemote = new Remote(new LGTV());
+LGRemote.powerOn();
+LGRemote.powerOff();
