@@ -152,7 +152,7 @@
 //   }
 // }
 
-//   Create Concrete Strategies
+//   // Create Concrete Strategies
 // class CreditCardPayment extends PaymentStrategy {
 //   pay(amount) {
 //     console.log(`Paid $${amount} using Credit Card.`);
@@ -171,7 +171,7 @@
 //   }
 // }
 
-//  Create a Context Class
+// //  Create a Context Class
 // class PaymentContext {
 //   constructor(strategy) {
 //     this.strategy = strategy;
@@ -195,6 +195,62 @@
 
 // paymentContext.setStrategy(new BitcoinPayment());
 // paymentContext.executePayment(300);
+
+// --------------------------example 2 
+// Strategy Interface
+// class GreetingStrategy {
+//   greet(name) {
+//       throw new Error("Greet method must be implemented");
+//   }
+// }
+
+// // Concrete Strategy 1: Casual Greeting
+// class CasualGreeting extends GreetingStrategy {
+//   greet(name) {
+//       return `Hey, ${name}! What's up?`;
+//   }
+// }
+
+// // Concrete Strategy 2: Formal Greeting
+// class FormalGreeting extends GreetingStrategy {
+//   greet(name) {
+//       return `Good evening, ${name}. It's a pleasure to meet you.`;
+//   }
+// }
+
+// // Concrete Strategy 3: Friendly Greeting
+// class FriendlyGreeting extends GreetingStrategy {
+//   greet(name) {
+//       return `Yo, ${name}! Hope you're having a great day!`;
+//   }
+// }
+
+// // Context Class
+// class Greeter {
+//   constructor(strategy) {
+//       this.strategy = strategy;
+//   }
+
+//   setStrategy(strategy) {
+//       this.strategy = strategy;
+//   }
+
+//   executeGreet(name) {
+//       return this.strategy.greet(name);
+//   }
+// }
+
+// // Example Usage
+// const greeter = new Greeter(new CasualGreeting());
+
+// console.log(greeter.executeGreet("Ali")); // Casual Greeting
+
+// greeter.setStrategy(new FormalGreeting());
+// console.log(greeter.executeGreet("Ali")); // Formal Greeting
+
+// greeter.setStrategy(new FriendlyGreeting());
+// console.log(greeter.executeGreet("Ali")); // Friendly Greeting
+
 
 //  ----------------------------------Proxy Pattern-------------------------------------
 // The Proxy Pattern is a structural design pattern used to provide a surrogate or placeholder for another object to control access to it. The proxy acts as an intermediary between the client and the real object, adding an additional layer of control such as lazy initialization, access control, logging, or caching.
@@ -270,13 +326,81 @@
 // const observer2 = new Observer("Observer 2");
 // const observer3 = new Observer("Observer 3");
 // const observer4 = new Observer("Observer 4");
+// const observer5 = new Observer("Observer 5");
 
 // subject.addObserver(observer1);
 // subject.addObserver(observer2);
 // subject.addObserver(observer3);
 // subject.addObserver(observer4);
+// subject.addObserver(observer5);
+
+// subject.removeObserver(observer2)
 
 // subject.notifyObservers("New data available!");
+
+
+//-------------------------------------- example 2
+
+// Subject (Publisher)
+// class Newsletter {
+//   constructor() {
+//       this.subscribers = []; // List of observers
+//   }
+
+//   // Method to subscribe an observer
+//   subscribe(observer) {
+//       this.subscribers.push(observer);
+//   }
+
+//   // Method to unsubscribe an observer
+//   unsubscribe(observer) {
+//       this.subscribers = this.subscribers.filter(sub => sub !== observer);
+//   }
+
+//   // Method to notify all subscribers
+//   notify(news) {
+//       this.subscribers.forEach(subscriber => subscriber.update(news));
+//   }
+// }
+
+// // Observer (Subscriber)
+// class Subscriber {
+//   constructor(name) {
+//       this.name = name;
+//   }
+
+//   // Update method that gets called when notified
+//   update(news) {
+//       console.log(`${this.name} received news: ${news}`);
+//   }
+// }
+
+// // Example Usage
+
+// // Create a newsletter (Subject)
+// const techNewsletter = new Newsletter();
+
+// // Create subscribers (Observers)
+// const alice = new Subscriber("Alice");
+// const bob = new Subscriber("Bob");
+// const Jimy = new Subscriber("Jimy");
+
+// // Subscribe to the newsletter
+// techNewsletter.subscribe(alice);
+// techNewsletter.subscribe(bob);
+// techNewsletter.subscribe(Jimy);
+
+// // Notify subscribers with some news
+// techNewsletter.notify("New JavaScript features released!");
+
+// // Unsubscribe a subscriber
+// techNewsletter.unsubscribe(bob);
+
+// // Notify again after unsubscription
+// techNewsletter.notify("React 19 is coming soon!");
+// techNewsletter.notify("Typescript  is coming soon!");
+
+
 
 // ----------------------------------------Decorator Pattern-----------------------------------
 // allows you to dynamically add new behaviors or functionalities to an object without modifying its original structure.
@@ -1115,65 +1239,65 @@
 // bitcoinPayment.makePayment(300);
 
 // Step 1: Create an interface for TV (Implementation)
-class TV {
-  turnOn() {
-    console.log('TV is ON');
-  }
-  turnOff() {
-    console.log('TV is OFF');
-  }
-}
+// class TV {
+//   turnOn() {
+//     console.log('TV is ON');
+//   }
+//   turnOff() {
+//     console.log('TV is OFF');
+//   }
+// }
 
-// Step 2: Create Concrete Implementations (Different TV Brands)
-class SonyTV extends TV {
-  turnOn() {
-    console.log('Sony TV is ON');
-  }
-  turnOff() {
-    console.log('Sony TV is OFF');
-  }
-}
+// // Step 2: Create Concrete Implementations (Different TV Brands)
+// class SonyTV extends TV {
+//   turnOn() {
+//     console.log('Sony TV is ON');
+//   }
+//   turnOff() {
+//     console.log('Sony TV is OFF');
+//   }
+// }
 
-class SamsungTV extends TV {
-  turnOn() {
-    console.log('Samsung TV is ON');
-  }
-  turnOff() {
-    console.log('Samsung TV is OFF');
-  }
-}
+// class SamsungTV extends TV {
+//   turnOn() {
+//     console.log('Samsung TV is ON');
+//   }
+//   turnOff() {
+//     console.log('Samsung TV is OFF');
+//   }
+// }
 
-class LGTV extends TV {
-  turnOn() {
-    console.log('LG TV is ON');
-  }
-  turnOff() {
-    console.log('LG TV is OFF');
-  }
-}
+// class LGTV extends TV {
+//   turnOn() {
+//     console.log('LG TV is ON');
+//   }
+//   turnOff() {
+//     console.log('LG TV is OFF');
+//   }
+// }
 
-// Step 3: Create an Abstraction (Remote Control)
-class Remote {
-  constructor(tv) {
-    this.tv = tv; // Bridge: The remote holds a reference to a TV
-  }
+// // Step 3: Create an Abstraction (Remote Control)
+// class Remote {
+//   constructor(tv) {
+//     this.tv = tv; // Bridge: The remote holds a reference to a TV
+//   }
 
-  powerOn() {
-    this.tv.turnOn(); // Delegates the action to the TV
-  }
+//   powerOn() {
+//     this.tv.turnOn(); // Delegates the action to the TV
+//   }
 
-  powerOff() {
-    this.tv.turnOff();
-  }
-}
+//   powerOff() {
+//     this.tv.turnOff();
+//   }
+// }
 
-// Step 4: Use the Bridge
-const sonyRemote = new Remote(new SonyTV());
-sonyRemote.powerOn(); // Output: Sony TV is ON
+// // Step 4: Use the Bridge
+// const sonyRemote = new Remote(new SonyTV());
+// sonyRemote.powerOn(); // Output: Sony TV is ON
 
-const samsungRemote = new Remote(new SamsungTV());
-samsungRemote.powerOn(); // Output: Samsung TV is ON
+// const samsungRemote = new Remote(new SamsungTV());
+// samsungRemote.powerOn(); // Output: Samsung TV is ON
 
-const LGRemote = new Remote(new LGTV());
-LGRemote.powerOn();
-LGRemote.powerOff();
+// const LGRemote = new Remote(new LGTV());
+// LGRemote.powerOn();
+// LGRemote.powerOff();
