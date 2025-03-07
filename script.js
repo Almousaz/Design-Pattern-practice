@@ -956,7 +956,7 @@
 // // is a structural design pattern that lets you compose objects into tree-like structures to represent part-whole hierarchies. It enables clients to treat individual objects and compositions of objects uniformly.
 // // In simpler terms, the Composite Pattern allows you to treat a group of objects the same way as a single object. This is particularly useful when you want to work with a hierarchical collection of objects, where individual objects and groups of objects should be treated in the same way.
 
-// // Component
+// Component
 // class Worker {
 //   constructor(name) {
 //     this.name = name;
@@ -1012,7 +1012,7 @@
 // manager2.getDetails();
 
 // // -----------------------------------example 2----------------------------
-// // Component: Common interface for both Files and Folders
+// Component: Common interface for both Files and Folders
 // class FileSystemItem {
 //   constructor(name) {
 //     this.name = name;
@@ -1073,6 +1073,73 @@
 
 // // Displaying the file system
 // mainFolder.showDetails();
+
+// -----------------------example 3 
+
+// Component (Common Interface)
+class EmployeeComponent {
+  constructor(name, position) {
+      this.name = name;
+      this.position = position;
+  }
+
+  showDetails() {
+      throw new Error("Method 'showDetails()' must be implemented.");
+  }
+}
+
+// Leaf (Employee)
+class Employee extends EmployeeComponent {
+  showDetails() {
+      console.log(`${this.position}: ${this.name}`);
+  }
+}
+
+// Composite (Manager)
+class Manager extends EmployeeComponent {
+  constructor(name, position) {
+      super(name, position);
+      this.subordinates = [];
+  }
+
+  add(employee) {
+      this.subordinates.push(employee);
+  }
+
+  remove(employee) {
+      this.subordinates = this.subordinates.filter(sub => sub !== employee);
+  }
+
+  showDetails() {
+      console.log(`${this.position}: ${this.name}`);
+      console.log("  Subordinates:");
+      this.subordinates.forEach(sub => {
+          console.log("    -", sub.name, `(${sub.position})`);
+      });
+  }
+}
+
+// Example Usage
+const ceo = new Manager("Alice", "CEO");
+const headOfEngineering = new Manager("Bob", "Head of Engineering");
+const headOfMarketing = new Manager("Charlie", "Head of Marketing");
+
+const developer1 = new Employee("David", "Software Engineer");
+const developer2 = new Employee("Eve", "Software Engineer");
+const marketer = new Employee("Frank", "Marketing Specialist");
+
+// Build hierarchy
+ceo.add(headOfEngineering);
+ceo.add(headOfMarketing);
+headOfEngineering.add(developer1);
+headOfEngineering.add(developer2);
+headOfMarketing.add(marketer);
+
+// Display hierarchy
+ceo.showDetails();
+headOfEngineering.showDetails();
+headOfMarketing.showDetails();
+
 
 // // ---------------------------------------Bridge Design Pattern------------------------------------
 // // is a structural design pattern that decouples an abstraction from its implementation, allowing them to evolve independently. In simpler terms, it allows you to separate the interface (abstraction) from the implementation, so that the two can vary independently.
